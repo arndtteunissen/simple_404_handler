@@ -21,5 +21,10 @@
     "minimum-stability": "stable",
     "require": {
         "typo3/cms-frontend": ">=7.6 || ~8.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Arndtteunissen\\Simple404Handler\\": "Classes/"
+        }
     }
 }
