@@ -3,7 +3,7 @@
     "description": "Enables simple 404 Page NotFound handling, also for multilingual sites.",
     "type": "typo3-cms-extension",
     "license": "GPLv2.0",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "keywords": [
         "error-handling",
         "404",
@@ -30,6 +30,16 @@
     "autoload": {
         "psr-4": {
             "Arndtteunissen\\Simple404Handler\\": "Classes/"
+        }
+    },
+    "config": {
+        "vendor-dir": ".Build/vendor",
+        "bin-dir": ".Build/bin"
+    },
+    "extra": {
+        "typo3/cms": {
+            "cms-package-dir": "{$vendor-dir}/typo3/cms",
+            "web-dir": ".Build/Web"
         }
     }
 }
