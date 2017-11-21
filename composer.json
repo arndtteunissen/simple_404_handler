@@ -8,6 +8,10 @@
         "404",
         "page-not-found"
     ],
+    "homepage": "https://github.com/arndtteunissen/simple_404_handler",
+    "support": {
+        "issues": "https://github.com/arndtteunissen/simple_404_handler/issues"
+    },
     "authors": [
         {
             "name": "Joshua Westerheide",

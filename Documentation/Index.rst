@@ -46,4 +46,4 @@ Extension Name
 
 	**Table of Contents**
 
-See `README.md link`__ for more information.
+See `README.md <https://github.com/arndtteunissen/simple_404_handler/blob/master/README.md>`__ for more information.
