@@ -16,4 +16,9 @@ call_user_func(function ($extKey) {
         $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$extKey] = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$extKey]);
     }
 
+    // Enable error handling
+    if ($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$extKey]['404page'] > 0) {
+        $GLOBALS['TYPO3_CONF_VARS']['FE']['pageNotFound_handling'] = 'USER_FUNCTION:' . \Arndtteunissen\Simple404Handler\UserFunc\Page::class . '->pageNotFound';
+    }
+
 }, $_EXTKEY);
