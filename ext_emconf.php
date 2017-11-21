@@ -10,7 +10,7 @@
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Simple 404 handler',
     'description' => 'Enables simple 404 Page NotFound handling, also for multilingual sites.',
-    'version' => '1.0.1',
+    'version' => '1.0.2',
     'category' => 'fe',
     'constraints' => [
         'depends' => [
