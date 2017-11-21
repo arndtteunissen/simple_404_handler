@@ -1,23 +1,21 @@
 language: php
+php:
+  - 7.1
 
 branches:
   only:
-    - master
+    - /^([0-9]{1,}\.){1,2}(x|[0-9]{1,})$/
 
 notifications:
   email:
     - dev@arndtteunissen.de
-
-matrix:
-  include:
-    - php: 7.1
 
 sudo: false
 cache:
   directories:
     - $HOME/.composer/cache
 
-after_script:
+script:
   - >
     if [ -n "$TRAVIS_TAG" ] && [ -n "$TYPO3_ORG_USERNAME" ] && [ -n "$TYPO3_ORG_PASSWORD" ]; then
       composer require --dev namelesscoder/typo3-repository-client:^1.2.0
