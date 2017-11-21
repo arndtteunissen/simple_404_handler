@@ -10,11 +10,11 @@
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Simple 404 handler',
     'description' => 'Enables simple 404 Page NotFound handling, also for multilingual sites.',
-    'version' => '1.0.0',
+    'version' => '1.0.1',
     'category' => 'fe',
     'constraints' => [
         'depends' => [
-            'typo3' => '7.6.99-8.7.99'
+            'typo3' => '6.2.0-8.7.99'
         ]
     ],
     'state' => 'stable',

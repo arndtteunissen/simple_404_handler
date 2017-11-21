@@ -55,22 +55,17 @@ class Page
     /**
      * Make absolute uri from relative uri.
      *
-     * @param string $relativeUri
+     * @param string $path
      * @return string
      * @throws \UnexpectedValueException
      */
-    protected function makeAbsoluteUri($relativeUri)
+    protected function makeAbsoluteUri($path)
     {
-        $domain = GeneralUtility::getIndpEnv('HTTP_HOST');
+        $absoluteUrlScheme = GeneralUtility::getIndpEnv('TYPO3_SSL') ? 'https' : 'http';
+        $siteUrl = GeneralUtility::getIndpEnv('HTTP_HOST');
+        $siteUrl .= rtrim(GeneralUtility::getIndpEnv('TYPO3_SITE_PATH'), '/');
 
-        // GeneralUtility::getIndpEnv($key)
-        $absoluteUrlScheme = 'http';
-        if (GeneralUtility::getIndpEnv('TYPO3_SSL')) {
-            $absoluteUrlScheme = 'https';
-        }
-        $domain = $domain . rtrim(GeneralUtility::getIndpEnv('TYPO3_SITE_PATH'), '/');
-
-        return sprintf('%s://%s/%s', $absoluteUrlScheme, $domain, ltrim($relativeUri, '/'));
+        return sprintf('%s://%s/%s', $absoluteUrlScheme, $siteUrl, ltrim($path, '/'));
     }
 
     /**
@@ -80,36 +75,30 @@ class Page
      */
     protected function emitSysLanguageUid()
     {
-        $sysLanguageUid = 0;
+        $sysLanguageUid = (int)GeneralUtility::_GP('L');
 
         if (ExtensionManagementUtility::isLoaded('realurl')) {
             try {
                 $config = $this->getRealurlConfig();
 
-                if ((int)GeneralUtility::_GP('L') > 0) {
-                    $sysLanguageUid = (int)GeneralUtility::_GP('L');
-                } elseif (is_array($config) && isset($config['preVars']) && is_array($config['preVars'])) {
+                if (is_array($config) && isset($config['preVars']) && is_array($config['preVars'])) {
                     $requestUri = trim(GeneralUtility::getIndpEnv('REQUEST_URI'), '/');
                     $requestUri = substr($requestUri, strlen(GeneralUtility::getIndpEnv('TYPO3_SITE_PATH')) - 1);
-                    $uriParts   = explode('/', $requestUri);
-                    $language   = array_shift($uriParts);
+                    $uriParts = explode('/', $requestUri);
+                    $language = array_shift($uriParts);
 
                     foreach ($config['preVars'] as $preVarConfig) {
                         if (isset($preVarConfig['GETvar']) && $preVarConfig['GETvar'] === 'L' && isset($preVarConfig['valueMap'][$language])) {
                             $sysLanguageUid = (int)$preVarConfig['valueMap'][$language];
                         }
                     }
-                } else {
-                    $sysLanguageUid = (int)GeneralUtility::_GP('L');
                 }
             } catch (\UnexpectedValueException $e) {
                 return 0;
             }
-        } else {
-            $sysLanguageUid = (int)GeneralUtility::_GP('L');
         }
 
-        return $sysLanguageUid;
+        return max(0, $sysLanguageUid);
     }
 
     /**

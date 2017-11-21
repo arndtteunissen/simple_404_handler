@@ -3,7 +3,7 @@
     "description": "Enables simple 404 Page NotFound handling, also for multilingual sites.",
     "type": "typo3-cms-extension",
     "license": "GPLv2.0",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "keywords": [
         "error-handling",
         "404",
@@ -25,7 +25,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "typo3/cms-frontend": ">=7.6 || ~8.7"
+        "typo3/cms-frontend": "^6.2 || ^7.6 || ^8.7"
     },
     "autoload": {
         "psr-4": {
