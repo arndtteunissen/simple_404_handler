@@ -1,0 +1,35 @@
+{
+    "name": "arndtteunissen/simple_404_handler",
+    "description": "Enables simple 404 Page NotFound handling, also for multilingual sites.",
+    "type": "typo3-cms-extension",
+    "license": "GPLv2.0",
+    "version": "1.0.0",
+    "keywords": [
+        "error-handling",
+        "404",
+        "page-not-found"
+    ],
+    "homepage": "https://github.com/arndtteunissen/simple_404_handler",
+    "support": {
+        "issues": "https://github.com/arndtteunissen/simple_404_handler/issues"
+    },
+    "authors": [
+        {
+            "name": "Joshua Westerheide",
+            "email": "dev@jdoubleu.de"
+        },
+        {
+            "name": "Tim Schreiner",
+            "email": "schreiner.tim@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "typo3/cms-frontend": ">=7.6 || ~8.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Arndtteunissen\\Simple404Handler\\": "Classes/"
+        }
+    }
+}

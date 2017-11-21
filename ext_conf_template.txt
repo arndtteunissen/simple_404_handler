@@ -1,0 +1,2 @@
+# cat=config/enable; type=int+; label=404 Error Page:The Uid of the page to show when 404 Not Found error occurs
+404page = 0
