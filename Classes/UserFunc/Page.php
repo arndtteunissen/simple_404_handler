@@ -75,36 +75,30 @@ class Page
      */
     protected function emitSysLanguageUid()
     {
-        $sysLanguageUid = 0;
+        $sysLanguageUid = (int)GeneralUtility::_GP('L');
 
         if (ExtensionManagementUtility::isLoaded('realurl')) {
             try {
                 $config = $this->getRealurlConfig();
 
-                if ((int)GeneralUtility::_GP('L') > 0) {
-                    $sysLanguageUid = (int)GeneralUtility::_GP('L');
-                } elseif (is_array($config) && isset($config['preVars']) && is_array($config['preVars'])) {
+                if (is_array($config) && isset($config['preVars']) && is_array($config['preVars'])) {
                     $requestUri = trim(GeneralUtility::getIndpEnv('REQUEST_URI'), '/');
                     $requestUri = substr($requestUri, strlen(GeneralUtility::getIndpEnv('TYPO3_SITE_PATH')) - 1);
-                    $uriParts   = explode('/', $requestUri);
-                    $language   = array_shift($uriParts);
+                    $uriParts = explode('/', $requestUri);
+                    $language = array_shift($uriParts);
 
                     foreach ($config['preVars'] as $preVarConfig) {
                         if (isset($preVarConfig['GETvar']) && $preVarConfig['GETvar'] === 'L' && isset($preVarConfig['valueMap'][$language])) {
                             $sysLanguageUid = (int)$preVarConfig['valueMap'][$language];
                         }
                     }
-                } else {
-                    $sysLanguageUid = (int)GeneralUtility::_GP('L');
                 }
             } catch (\UnexpectedValueException $e) {
                 return 0;
             }
-        } else {
-            $sysLanguageUid = (int)GeneralUtility::_GP('L');
         }
 
-        return $sysLanguageUid;
+        return max(0, $sysLanguageUid);
     }
 
     /**
