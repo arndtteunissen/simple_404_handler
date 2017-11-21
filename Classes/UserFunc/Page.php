@@ -55,22 +55,17 @@ class Page
     /**
      * Make absolute uri from relative uri.
      *
-     * @param string $relativeUri
+     * @param string $path
      * @return string
      * @throws \UnexpectedValueException
      */
-    protected function makeAbsoluteUri($relativeUri)
+    protected function makeAbsoluteUri($path)
     {
-        $domain = GeneralUtility::getIndpEnv('HTTP_HOST');
+        $absoluteUrlScheme = GeneralUtility::getIndpEnv('TYPO3_SSL') ? 'https' : 'http';
+        $siteUrl = GeneralUtility::getIndpEnv('HTTP_HOST');
+        $siteUrl .= rtrim(GeneralUtility::getIndpEnv('TYPO3_SITE_PATH'), '/');
 
-        // GeneralUtility::getIndpEnv($key)
-        $absoluteUrlScheme = 'http';
-        if (GeneralUtility::getIndpEnv('TYPO3_SSL')) {
-            $absoluteUrlScheme = 'https';
-        }
-        $domain = $domain . rtrim(GeneralUtility::getIndpEnv('TYPO3_SITE_PATH'), '/');
-
-        return sprintf('%s://%s/%s', $absoluteUrlScheme, $domain, ltrim($relativeUri, '/'));
+        return sprintf('%s://%s/%s', $absoluteUrlScheme, $siteUrl, ltrim($path, '/'));
     }
 
     /**
