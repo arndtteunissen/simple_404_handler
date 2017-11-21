@@ -1,3 +1,2 @@
-/vendor/
-/typo3/
+/.Build/*
 /composer.lock
