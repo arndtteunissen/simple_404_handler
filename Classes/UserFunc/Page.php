@@ -35,18 +35,20 @@ class Page
             )
         );
 
+        $error = [];
         $response = GeneralUtility::getUrl(
             $url,
             false,
             [
                 'Referer: ' . $conf['currentUrl']
-            ]
+            ],
+            $error
         );
 
         if ($response) {
             echo $response;
         } else {
-            throw new \RuntimeException("Couldn't show error page. Subrequest for '" . $url . "' failed.", 1511191687);
+            throw new \RuntimeException(sprintf("Couldn't show error page. Subrequest for '%s' failed. Reason (%s): %s", $url, $error['error'], $error['message']) , 1511191687, $error['exception']);
         }
     }
 
