@@ -9,7 +9,7 @@ By default the TYPO3 core enables error handling for pages, even with including 
 ### Installation using Composer (recommended)
 In your TYPO3 site folder run 
 
-`composer require typo3-ter/simple_404_handler`
+`composer require arndtteunissen/simple_404_handler`
  
 to install this extension.
 
