@@ -1,5 +1,5 @@
 # Simple 404 handler for typo3 CMS
-This extension uses TYPO3 core error handling API to handle *404 (Page Not Found)* error pages. it also support multilingual Websites
+This extension uses TYPO3 core error handling API to handle *404 (Page Not Found)* error pages. it also supports multilingual Websites
 
 ## Motivation
 TYPO3 core comes with simple 404 page handling, but it does not support multilingual 404 pages
