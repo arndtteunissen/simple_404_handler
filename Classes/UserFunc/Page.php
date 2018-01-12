@@ -20,11 +20,13 @@ class Page
     /**
      * @param array $conf
      * @param TyposcriptFrontendController $ref
+     * @return string
      * @throws \RuntimeException
      */
     public function pageNotFound($conf, $ref)
     {
-        $pageUid        = $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['simple_404_handler']['404page'];
+        $extConf        = $this->getExtconf();
+        $pageUid        = $extConf['404page'];
         $sysLanguageUid = $this->emitSysLanguageUid();
 
         $url = $this->makeAbsoluteUri(
@@ -46,7 +48,7 @@ class Page
         );
 
         if ($response) {
-            echo $response;
+            return $response;
         } else {
             throw new \RuntimeException(sprintf("Couldn't show error page. Subrequest for '%s' failed. Reason (%s): %s", $url, $error['error'], $error['message']) , 1511191687, $error['exception']);
         }
@@ -137,5 +139,21 @@ class Page
         }
 
         return $config;
+    }
+
+    /**
+     * Fetch and prepare the extension configuration
+     *
+     * @return array
+     */
+    private function getExtconf()
+    {
+        $extConf = $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['simple_404_handler'];
+
+        if (!is_array($extConf)) {
+            $extConf = unserialize($extConf);
+        }
+
+        return $extConf;
     }
 }
