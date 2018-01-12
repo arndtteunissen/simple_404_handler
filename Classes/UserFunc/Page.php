@@ -20,6 +20,7 @@ class Page
     /**
      * @param array $conf
      * @param TyposcriptFrontendController $ref
+     * @return string
      * @throws \RuntimeException
      */
     public function pageNotFound($conf, $ref)
@@ -47,7 +48,7 @@ class Page
         );
 
         if ($response) {
-            echo $response;
+            return $response;
         } else {
             throw new \RuntimeException(sprintf("Couldn't show error page. Subrequest for '%s' failed. Reason (%s): %s", $url, $error['error'], $error['message']) , 1511191687, $error['exception']);
         }
