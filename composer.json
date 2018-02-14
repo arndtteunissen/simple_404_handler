@@ -2,7 +2,7 @@
     "name": "arndtteunissen/simple_404_handler",
     "description": "Enables simple 404 Page NotFound handling, also for multilingual sites.",
     "type": "typo3-cms-extension",
-    "license": "GPLv2.0",
+    "license": "GPL-2.0-or-later",
     "keywords": [
         "error-handling",
         "404",
